@@ -6,6 +6,7 @@
   Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
 */
 
+
 function twoSum(nums: number[], target: number): number[] {
   for (let i = 0; i < nums.length; i++) {
     for (let n = i + 1; n < nums.length; n++) {
