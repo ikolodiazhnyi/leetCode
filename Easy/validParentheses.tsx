@@ -1,22 +1,27 @@
-const isOpening = (ch: string): boolean => {
-  const opening = "({[";
-  return opening.includes(ch);
+const isOpening = (ch: string): number => {
+  const opening = ["(", "{", "["];
+
+  return opening.indexOf(ch);
 };
 
-const isClosing = (ch: string): boolean => {
-  const closing = ")]}";
-  return closing.includes(ch);
+const isCertainClosing = (ch: string, i: number): boolean => {
+  const closing = [")", "}", "]"];
+
+  return ch === closing[i];
 };
 
 function isValid(s: string): boolean {
   let i = 0;
+
   while (i < s.length) {
-    if (isOpening(s[i]) && isClosing(s[i + 1])) {
+    const nextCh = s[i + 1];
+    const openingIndex = isOpening(s[i]);
+
+    if (openingIndex >= 0 && isCertainClosing(nextCh, openingIndex)) {
       i += 2;
-    } else {
-      console.log(i);
-      return false;
+      continue;
     }
+    return false;
   }
   return true;
 }
