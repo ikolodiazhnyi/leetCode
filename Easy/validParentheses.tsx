@@ -17,6 +17,7 @@ function isValid(s: string): boolean {
     const nextCh = s[i + 1];
     const openingIndex = isOpening(s[i]);
 
+    
     if (openingIndex >= 0 && isCertainClosing(nextCh, openingIndex)) {
       i += 2;
       continue;
