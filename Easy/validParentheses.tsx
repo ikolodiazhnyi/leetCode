@@ -1,28 +1,37 @@
+/* 
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
+*/
+
 const isOpening = (ch: string): number => {
   const opening = ["(", "{", "["];
 
   return opening.indexOf(ch);
 };
 
-const isCertainClosing = (ch: string, i: number): boolean => {
-  const closing = [")", "}", "]"];
-
-  return ch === closing[i];
+const brackets = {
+  "}": "{",
+  "]": "[",
+  ")": "(",
 };
 
 function isValid(s: string): boolean {
-  let i = 0;
+  let opening:string[] = [];
 
-  while (i < s.length) {
-    const nextCh = s[i + 1];
-    const openingIndex = isOpening(s[i]);
+  for (let i = 0; i < s.length; i++) {
+    let currentElem = s[i];
 
-    
-    if (openingIndex >= 0 && isCertainClosing(nextCh, openingIndex)) {
-      i += 2;
-      continue;
+    if (isOpening(currentElem) >= 0) {
+      opening = [...opening, s[i]];
+    } else if (opening.pop() !== brackets[currentElem]) {
+      return false;
     }
-    return false;
   }
-  return true;
+
+  return !opening.length;
 }
