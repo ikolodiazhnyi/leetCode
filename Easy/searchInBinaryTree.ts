@@ -12,6 +12,12 @@
  * }
  */
 
+type TreeNode = {
+  val: number;
+  right: TreeNode;
+  left: TreeNode
+}
+
 function searchBST(root: TreeNode | null, val: number): TreeNode | null {
   if (!root) {
     return null;
